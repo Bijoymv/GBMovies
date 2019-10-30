@@ -1,13 +1,4 @@
-
-* {
-    box-sizing: border-box;
-  }
-  
-  body {
-    margin:0;
-  }
-  
-  .App {
+.App {
     text-align: center;
     background-color: #343a40;
     min-height: 100vh;
