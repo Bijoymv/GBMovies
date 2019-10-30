@@ -1,3 +1,3 @@
 export const types= {
-    GET_MOVIES:'getNovies'
+    GET_MOVIES:'getMovies'
 }

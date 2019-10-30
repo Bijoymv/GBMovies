@@ -1,7 +1,7 @@
 import { types } from './../../actions/types';
 import getsReducer from './reducer';
 
-describe('Posts Reducer', () => {
+describe('Gets Reducer', () => {
 
     it('Should return default state', () => {
         const newState = getsReducer(undefined, {});
