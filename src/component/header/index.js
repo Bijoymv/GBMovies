@@ -5,7 +5,7 @@ import './style.css';
 
 const Header = (props) => {
     return(
-            <header className="comp-header-container">
+            <header className="comp-header-container" data-test="comp-header-container">
                 <Container className="pl-0 pr-0 mr-0 ml-0">
                     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                         <Navbar.Brand href="#home" onClick={props.clickMenu}>G&B Movies</Navbar.Brand>
@@ -16,6 +16,7 @@ const Header = (props) => {
                                 height="50"
                                 className="d-inline-block align-top"
                                 alt="GB Logo"
+                                data-test="comp-header-logo"
                             />
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
