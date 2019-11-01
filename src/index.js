@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { store } from "./createStore";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
-import App from "./component/app";
+import App from "./App";
 
 console.log("current store state:", store.getState());
 ReactDOM.render(

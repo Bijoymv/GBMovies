@@ -23,12 +23,34 @@ describe("Header component", () => {
 
   describe("Header component with props value", () => {
     let component;
+    let mockFuncClick;
     beforeEach(() => {
-      const handleClick = jest.fn();
+      mockFuncClick = jest.fn();
       const props = {
-        clickMenu: handleClick
+        clickMenu: mockFuncClick
       };
       component = getComponent(props);
+    });
+
+    it("Should call the callback function on click event", () => {
+      const container = FindTestValue(component, "comp-header-menu-home");
+      container.simulate("click");
+      const callback = mockFuncClick.mock.calls.length;
+      expect(callback).toBe(1);
+    });
+
+    it("Should call the callback function on click event", () => {
+      const container = FindTestValue(component, "comp-header-menu-fav");
+      container.simulate("click");
+      const callback = mockFuncClick.mock.calls.length;
+      expect(callback).toBe(1);
+    });
+
+    it("Should call the callback function on click event", () => {
+      const container = FindTestValue(component, "comp-header-menu-watch");
+      container.simulate("click");
+      const callback = mockFuncClick.mock.calls.length;
+      expect(callback).toBe(1);
     });
 
     it("Should render without errors", () => {

@@ -17,6 +17,7 @@ const Search = props => {
         <input
           onChange={handleChangeEvent}
           placeholder="Search good and bad movies by name or title..."
+          data-test="component-search-input-text"
         />
       </div>
     </div>

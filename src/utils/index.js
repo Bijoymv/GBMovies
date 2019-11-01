@@ -1,4 +1,7 @@
 import checkPropTypes from "check-prop-types";
+import { applyMiddleware, createStore } from "redux";
+import rootReducer from "./../reducers";
+import { middlewares } from "./../createStore";
 
 export const FindTestValue = (component, value) => {
   const container = component.find(`[data-test='${value}']`);
@@ -15,19 +18,24 @@ export const checkProps = (component, expectedProps) => {
   return propsErr;
 };
 
+export const testStore = initialState => {
+  const createStoreWithMiddleware = applyMiddleware(...middlewares)(
+    createStore
+  );
+  return createStoreWithMiddleware(rootReducer, initialState);
+};
 
 export const debounce = (fn, delay) => {
   //classic debounce function which accepts a callback function and delay
   let timer = null;
-  return function (...args) {
-      const context = this;
-      timer && clearTimeout(timer);
-      timer = setTimeout(() => {
-          fn.apply(context, args);
-      }, delay);
+  return function(...args) {
+    const context = this;
+    timer && clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn.apply(context, args);
+    }, delay);
   };
 };
-
 
 //Localstorage methods
 
@@ -79,10 +87,9 @@ export const deleteLocalState = (type, id) => {
 };
 //End of localstorage methods
 
-//Search filter utility function 
+//Search filter utility function
 //This will filter search based on watch list, fav list and api response data
 //based on the user active menu status
-
 
 export const SearchFilter = (
   searchValue,

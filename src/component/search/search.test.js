@@ -10,14 +10,31 @@ const getComponent = (props = {}) => {
 
 describe("Search component", () => {
   describe("Checking props types", () => {
-    it("Should not through a warning", () => {
-      const searchChange = jest.fn();
-      const expectedProps = {
-        clickMenu: searchChange
-      };
 
+    let component;
+    let mockFuncChange;
+    beforeEach(() => {
+      mockFuncChange = jest.fn();
+      const props = {
+        searchChange: mockFuncChange
+      };
+      component = getComponent(props);
+    });
+
+    it("Should not through a warning", () => {
+      const expectedProps = {
+        searchChange: mockFuncChange
+      };
       const propsErr = checkProps(Search, expectedProps);
       expect(propsErr).toBeUndefined();
+    });
+
+    it("Should call the callback function on change event", () => {
+      const container = FindTestValue(component, "component-search-input-text");
+      container.simulate("change");
+      container.simulate("change");
+      const callback = mockFuncChange.mock.calls.length;
+      expect(callback).toBe(2);
     });
   });
 

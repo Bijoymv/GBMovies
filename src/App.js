@@ -1,9 +1,9 @@
 import React from "react";
-import Header from "../header";
-import MovieList from "../movielist";
+import Header from "./component/header";
+import MovieList from "./component/movielist";
 import { connect } from "react-redux";
-import Search from "../search";
-import { debounce } from "../../utils";
+import Search from "./component/search";
+import { debounce } from "./utils";
 import {
   getMovies,
   getWatchList,
@@ -12,9 +12,9 @@ import {
   getStorageAdd,
   getStorageDelete,
   getStorageSearch
-} from "../../actions";
+} from "./actions";
 
-import "./style.css";
+import "./App.css";
 
 class App extends React.Component {
   constructor(props) {

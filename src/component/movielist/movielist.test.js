@@ -32,15 +32,16 @@ describe("MovieList component", () => {
 
   describe("MovieList component with valid props value", () => {
     let component;
+    let mockFuncClick;
     beforeEach(() => {
-      const handleSubmit = jest.fn();
+      mockFuncClick = jest.fn();
       const props = {
         popularity: 432.456,
         poster_path: "/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",
         title: "Joker",
         overview: "During the 1980s.",
         id: 1234,
-        clickButton: handleSubmit
+        clickButton: mockFuncClick
       };
       component = getComponent(props);
     });
@@ -82,15 +83,16 @@ describe("MovieList component", () => {
 
   describe("MovieList component with movie popularity less tban 2", () => {
     let component;
+    let mockFuncClick;
     beforeEach(() => {
-      const handleSubmit = jest.fn();
+      mockFuncClick = jest.fn();
       const expectedProps = {
         popularity: 1,
         poster_path: "/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",
         title: "Joker",
         overview: "During the 1980s.",
         id: 1234,
-        clickButton: handleSubmit,
+        clickButton: mockFuncClick,
         favMenu: false,
         watchMenu: false,
         favList: [],
@@ -202,10 +204,8 @@ describe("MovieList component", () => {
 
   describe("MovieList component with movie not in user watchlist", () => {
     let component;
-    beforeEach(() => {});
-
     it("Should render watch later button", () => {
-      const handleSubmit = jest.fn();
+      const mockFuncClick = jest.fn();
       const watchList = [
         {
           popularity: 4,
@@ -221,7 +221,7 @@ describe("MovieList component", () => {
         title: "Joker",
         overview: "During the 1980s.",
         id: 1234,
-        clickButton: handleSubmit,
+        clickButton: mockFuncClick,
         favMenu: false,
         watchMenu: false,
         favList: [],
@@ -230,6 +230,10 @@ describe("MovieList component", () => {
       component = getComponent(expectedProps);
       const container = FindTestValue(component, "component-movielist-watch");
       expect(container.length).toBe(1);
+
+      container.simulate("click");
+      const callback = mockFuncClick.mock.calls.length;
+      expect(callback).toBe(1);
     });
 
     it("Should not render watch later if inside fav menu", () => {
@@ -295,7 +299,7 @@ describe("MovieList component", () => {
     let component;
 
     it("Should render add fav button", () => {
-      const handleSubmit = jest.fn();
+      const mockFuncClick = jest.fn();
       const favList = [
         {
           popularity: 4,
@@ -311,7 +315,7 @@ describe("MovieList component", () => {
         title: "Joker",
         overview: "During the 1980s.",
         id: 1234,
-        clickButton: handleSubmit,
+        clickButton: mockFuncClick,
         favMenu: false,
         watchMenu: false,
         favList: favList,
@@ -320,6 +324,10 @@ describe("MovieList component", () => {
       component = getComponent(expectedProps);
       const container = FindTestValue(component, "component-movielist-fav");
       expect(container.length).toBe(1);
+
+      container.simulate("click");
+      const callback = mockFuncClick.mock.calls.length;
+      expect(callback).toBe(1);
     });
 
     it("Should not render fav button if inside fav menu", () => {
@@ -352,7 +360,7 @@ describe("MovieList component", () => {
     });
 
     it("Should not render fav button if inside watch menu", () => {
-      const handleSubmit = jest.fn();
+      let mockFuncClick = jest.fn();
       const favList = [
         {
           popularity: 4,
@@ -369,7 +377,7 @@ describe("MovieList component", () => {
         title: "Joker",
         overview: "During the 1980s.",
         id: 1234,
-        clickButton: handleSubmit,
+        clickButton: mockFuncClick,
         favMenu: false,
         watchMenu: true,
         favList: favList,
