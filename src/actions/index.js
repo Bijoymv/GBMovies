@@ -1,11 +1,16 @@
 import { types } from "./types";
 import axios from "axios";
-import { getLocalState } from "./../localStorage";
+import {
+  getLocalState,
+  addLocalState,
+  deleteLocalState
+} from "./../localStorage";
+import SearchFilter from "./../searchFilter";
 
-export const getMovies = () => async dispatch => {
+export const getMovies = (query = "gandhi") => async dispatch => {
   await axios
     .get(
-      "https://api.themoviedb.org/3/search/movie?api_key=7ceef1611488e1af83939c3725ad00d7&language=en-US&page=1&include_adult=false&query=gandhi"
+      `https://api.themoviedb.org/3/search/movie?api_key=7ceef1611488e1af83939c3725ad00d7&language=en-US&page=1&include_adult=false&query=${query}`
     )
     .then(result => {
       dispatch({
@@ -36,5 +41,43 @@ export const getStorage = () => {
   return {
     type: types.GET_STORAGE,
     payload: { favList: getLocalState("fav"), watchList: getLocalState("fav") }
+  };
+};
+
+export const getStorageAdd = (type, val) => {
+  addLocalState(type, val);
+  return {
+    type: types.GET_STORAGE_ADD,
+    payload: null
+  };
+};
+
+export const getStorageDelete = (type, val) => {
+  deleteLocalState(type, val);
+  return {
+    type: types.GET_STORAGE_DEL,
+    payload: null
+  };
+};
+
+export const getStorageSearch = (
+  searchValue,
+  movieData,
+  count,
+  favMenu,
+  watchMenu,
+  favWatchData
+) => {
+  const filterData = SearchFilter(
+    searchValue,
+    movieData,
+    count,
+    favMenu,
+    watchMenu,
+    favWatchData
+  );
+  return {
+    type: types.GET_STORAGE_SEARCH,
+    payload: { watchMenu: watchMenu, favMenu: favMenu, results: filterData }
   };
 };

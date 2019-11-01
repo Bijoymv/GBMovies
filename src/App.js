@@ -2,20 +2,60 @@ import React from "react";
 import Header from "./component/header";
 import MovieList from "./component/movielist";
 import { connect } from "react-redux";
-import { getMovies, getWatchList, getFavList, getStorage } from "./actions";
-import { addLocalState, deleteLocalState } from "./localStorage";
+import { deleteLocalState } from "./localStorage";
+import Search from "./component/search";
+import debounce from "./debounce";
+import {
+  getMovies,
+  getWatchList,
+  getFavList,
+  getStorage,
+  getStorageAdd,
+  getStorageDelete,
+  getStorageSearch
+} from "./actions";
+
 import "./App.css";
 
-class App extends React.PureComponent {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onSearchChange = this.onSearchChange.bind(this);
   }
 
   componentDidMount() {
     this.props.getMovies();
     this.props.getStorage();
+  }
+
+  fetchMovies = debounce(query => {
+    this.props.getMovies(query);
+  }, 500);
+
+  onSearchChange(ev) {
+    let query = ev.target.value;
+    if (query === "") {
+      query = "gandhi";
+    }
+
+    if (this.props.gets.favMenu || this.props.gets.watchMenu) {
+      const menuData = this.props.gets.favMenu
+        ? this.props.gets.favList
+        : this.props.gets.watchList;
+
+      this.props.getStorageSearch(
+        ev.target.value,
+        this.props.gets.results,
+        20,
+        this.props.gets.favMenu,
+        this.props.gets.watchMenu,
+        menuData
+      );
+    } else {
+      this.fetchMovies(query);
+    }
   }
 
   handleClick = type => {
@@ -34,21 +74,21 @@ class App extends React.PureComponent {
   handleSubmit = (type, val) => {
     switch (type) {
       case "watch_add":
-        addLocalState("watch", val);
+        this.props.getStorageAdd("watch", val);
         this.props.getWatchList();
         break;
       case "fav_add":
-        addLocalState("fav", val);
+        this.props.getStorageAdd("fav", val);
         this.props.getFavList();
         break;
       case "fav_del":
-        deleteLocalState("fav", val);
+        this.props.getStorageDelete("fav", val);
         if (this.props.gets.favMenu) {
           this.props.getFavList();
         }
         break;
       case "watch_del":
-        deleteLocalState("watch", val);
+        this.props.getStorageDelete("watch", val);
         if (this.props.gets.watchMenu) {
           this.props.getWatchList();
         }
@@ -68,6 +108,7 @@ class App extends React.PureComponent {
           favMenu={gets.favMenu}
           watchMenu={gets.watchMenu}
         />
+        <Search searchChange={this.onSearchChange} />
 
         {data.length > 0 && (
           <div>
@@ -89,6 +130,11 @@ class App extends React.PureComponent {
             })}
           </div>
         )}
+        {data.length === 0 && (
+          <div className="App-nocontent" data-test="App-nocontent">
+            Sorry, No Content Available!!!
+          </div>
+        )}
       </div>
     );
   }
@@ -102,5 +148,13 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getMovies, getWatchList, getFavList, getStorage }
+  {
+    getMovies,
+    getWatchList,
+    getFavList,
+    getStorage,
+    getStorageAdd,
+    getStorageDelete,
+    getStorageSearch
+  }
 )(App);

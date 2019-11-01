@@ -33,6 +33,15 @@ export default (state = initialstate, action) => {
       newState.favList = action.payload.favList;
       newState.watchList = action.payload.watchList;
       return newState;
+    case types.GET_STORAGE_SEARCH:
+      newState.favMenu = action.payload.favMenu;
+      newState.watchMenu = action.payload.watchMenu;
+      newState.results = action.payload.results;
+      return newState;
+    case types.GET_STORAGE_ADD:
+      return newState;
+    case types.GET_STORAGE_DEL:
+      return newState;
     default:
       return newState;
   }
