@@ -1,68 +1,58 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# GB Movies
+An web application application for searching good and bad movies. This responsive web app will list the movies from the TMDb database. 
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+* ### Search :
 
-### `npm start`
+    * #### Home
+    * User can enter the title of the movies in the input search box at the top header portion
+    * Search API will be triggered asynchronously to the TMDb database
+    * Search results will be shown in the web page below to text search box
+    * Web page will not show the movies with out movie titles
+    * Search feature is implemented with _debounce_ feature so that it trigger network calls after 500 ms delay
+    * Web page will display default posters if actual posters are not available
+    * If no matching title values found, it will show an error message
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    * #### Watch List Search
+    * Search here apply only to display the user added watchlist items
+    * If no matching title values found, it will show an error message
+    * Browser localstorage api is used to create the persistent watch list data
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+    * #### Favourite Search
+    * Search here apply only to display the user added favourite items
+    * If no matching title values found, it will show an error message
+    * Browser localstorage api is used to create the persistent favourite list data
 
-### `npm test`
+* ### Watch List :
+    * User can add watch items from home listing page
+    * Added watch list items are displayed under watch list tab 
+    * Searching the added watch list items can be done from here
+    * User can delete the added watch list item from this menu. 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* ### Favourites :
+    * User can add favourites items from home listing page
+    * Added favourites list items are displayed under favourites tab 
+    * Searching the added favourites items can be done from here
+    * User can delete the added favourites list item from this menu. 
 
-### `npm run build`
+## Frameworks and dependencies
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This project developed in react(16.11.0) and react-redux (7.1.1) framework. Used axios(0.19.0),redux-thunk,react-bootstrap dependencies for async API calls and responsive web layouts.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Build process
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This project is created using the react framework so building the application is same like any other react applications.
 
-### `npm run eject`
+## Limitations and Concerns
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* There is no pagination implemented, since the web app main feature is search, user can get all the desired results from 20 API entries. 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* Browser localstoarge api is using heavily in the application to store the persistent watch list and favourite data. In ideal case we will be creating database entries based on the user profiles, so this can be corrected if we move into database approach in the production. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* There is a space for more test coverage and the code refractoring. 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
