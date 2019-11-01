@@ -2,7 +2,6 @@ import React from "react";
 import Header from "./component/header";
 import MovieList from "./component/movielist";
 import { connect } from "react-redux";
-import { deleteLocalState } from "./localStorage";
 import Search from "./component/search";
 import debounce from "./debounce";
 import {

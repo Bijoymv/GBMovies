@@ -15,7 +15,7 @@ describe("Gets Reducer Test", () => {
     expect(newState).toEqual(initialstate);
   });
 
-  it("Should return new state if receiving type", () => {
+  it("Should return new state if receiving type GET_MOVIES", () => {
     const actionresult = {
       popularity: 432.456,
       poster_path: "/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",
@@ -37,7 +37,7 @@ describe("Gets Reducer Test", () => {
     expect(newState).toEqual(gets);
   });
 
-  it("Should return state with favMenu true and favlist empty array if localstorage is null", () => {
+  it("Should return new state if receiving type GET_FAV_LIST and payload empty", () => {
     const gets = {
       results: [],
       favMenu: true,
@@ -52,7 +52,7 @@ describe("Gets Reducer Test", () => {
     expect(newState).toEqual(gets);
   });
 
-  it("Should return new state with watchMenu true and watchList empty array if localstorage storage is null", () => {
+  it("Should return new state if receiving type GET_WATCH_LIST and payload empty", () => {
     const gets = {
       favMenu: false,
       watchMenu: true,
@@ -67,7 +67,7 @@ describe("Gets Reducer Test", () => {
     expect(newState).toEqual(gets);
   });
 
-  it("Should return new state with watchMenu true also with watchList array with localstorage", () => {
+  it("Should return new state if receiving type GET_WATCH_LIST", () => {
     const actionresult = {
       popularity: 432.456,
       poster_path: "/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",
@@ -89,7 +89,7 @@ describe("Gets Reducer Test", () => {
     expect(newState).toEqual(gets);
   });
 
-  it("Should return new state with favMenu true also favList array filled with localstorage", () => {
+  it("Should return new state if receiving type GET_FAV_LIST", () => {
     const actionresult = {
       popularity: 432.456,
       poster_path: "/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",
@@ -110,4 +110,107 @@ describe("Gets Reducer Test", () => {
     });
     expect(newState).toEqual(gets);
   });
+});
+
+
+it("Should return new state if receiving type GET_STORAGE", () => {
+  const favresult = {
+    popularity: 432.456,
+    poster_path: "/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",
+    title: "Joker",
+    overview: "During the 1980s.",
+    id: 123
+  };
+
+  const watchresult = {
+    popularity: 4322.456,
+    poster_path: "/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",
+    title: "Joker2",
+    overview: "During the 1980ssdsd.",
+    id: 12333
+  };
+
+  const payload = { favList: favresult, watchList: watchresult };
+
+  const gets = {
+    favList: favresult,
+    watchList: watchresult,
+    favMenu: false,
+    watchMenu: false,
+    results: []
+
+  };
+  const newState = getsReducer(undefined, {
+    type: types.GET_STORAGE,
+    payload: payload
+  });
+  expect(newState).toEqual(gets);
+});
+
+
+it("Should return new state if receiving type GET_STORAGE_SEARCH", () => {
+
+  const watchresult = {
+    popularity: 4322.456,
+    poster_path: "/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",
+    title: "Joker2",
+    overview: "During the 1980ssdsd.",
+    id: 12333
+  };
+
+  const payload= { watchMenu: true, favMenu: false, results: watchresult };
+
+  const gets = {
+    favList: [],
+    watchList: [],
+    favMenu: false,
+    watchMenu: true,
+    results:watchresult
+  };
+
+  const newState = getsReducer(undefined, {
+    type: types.GET_STORAGE_SEARCH,
+    payload: payload
+  });
+  expect(newState).toEqual(gets);
+});
+
+
+
+it("Should return new state if receiving type GET_STORAGE_ADD", () => {
+
+  const payload= null;
+
+  const gets = {
+    favMenu: false,
+    watchMenu: false,
+    favList: [],
+    watchList: [],
+    results: []
+  };
+
+  const newState = getsReducer(undefined, {
+    type: types.GET_STORAGE_ADD,
+    payload: payload
+  });
+  expect(newState).toEqual(gets);
+});
+
+it("Should return new state if receiving type GET_STORAGE_DEL", () => {
+
+  const payload= null;
+
+  const gets = {
+    favMenu: false,
+    watchMenu: false,
+    favList: [],
+    watchList: [],
+    results: []
+  };
+
+  const newState = getsReducer(undefined, {
+    type: types.GET_STORAGE_DEL,
+    payload: payload
+  });
+  expect(newState).toEqual(gets);
 });
