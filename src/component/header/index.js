@@ -5,17 +5,34 @@ import PropTypes from 'prop-types';
 import './style.css';
 
 const Header = (props) => {
-    const {clickMenu} = props;
-    
+    const {clickMenu,favMenu,watchMenu} = props;
     if(!clickMenu){
         return null;
     }
+    const clickMenuLink = (type) => {
+        if(clickMenu){
+            clickMenu(type);
+        }
+    };
+    let favMenuClass = "";
+    let watchMenuClass = "";
+    let homeMenuClass = "";
+    
+    if(favMenu){
+        favMenuClass = 'comp-header-highlight';
+    } else if(watchMenu) {
+        watchMenuClass = 'comp-header-highlight';
+    }else{
+        homeMenuClass= 'comp-header-highlight';
+    }
+
+  
     return(
             <header className="comp-header-container" data-test="comp-header-container">
                 <Container className="pl-0 pr-0 mr-0 ml-0" data-test="comp-nav-container">
                     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" data-test="comp-header-nav">
-                        <Navbar.Brand href="#home" onClick={props.clickMenu} data-test="comp-header-brandname">G&B Movies</Navbar.Brand>
-                        <Navbar.Brand href="#home" onClick={props.clickMenu} data-test="comp-header-logo-container">
+                        <Navbar.Brand href="#home" onClick={() => clickMenuLink('home')} data-test="comp-header-brandname">G&B Movies</Navbar.Brand>
+                        <Navbar.Brand href="#home" onClick={() => clickMenuLink('home')} data-test="comp-header-logo-container">
                             <img
                                 src={Logo}
                                 width="100"
@@ -28,13 +45,32 @@ const Header = (props) => {
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" data-test="comp-header-nav-toggle"/>
                         <Navbar.Collapse id="responsive-navbar-nav" data-test="comp-header-nav-collapse">
                             <Nav className="mr-auto" data-test="comp-header-nav-collapse-inner">
-                                <Nav.Link href={'#Home'} onClick={props.clickMenu} data-test="comp-header-menu-home">
+                                <Nav.Link 
+                                    className={`active ${homeMenuClass}`} 
+                                    href={'#Home'} 
+                                    onClick={() => clickMenuLink('home')} 
+                                    data-test="comp-header-menu-home"
+                                    id="home" 
+                                >
                                     Home
                                 </Nav.Link>
-                                <Nav.Link href={'#WatchLater'} onClick={props.clickMenu} data-test="comp-header-menu-watch">
+                                <Nav.Link 
+                                className={`active ${watchMenuClass}`} 
+                                href={'#WatchLater'} 
+                                onClick={() => clickMenuLink('watch_list')} 
+                                data-test="comp-header-menu-watch"
+                                id="WatchLater" 
+                                >
                                     WatchLater
                                 </Nav.Link>
-                                <Nav.Link href={'#Favourites'} onClick={props.clickMenu} data-test="comp-header-menu-fav">
+                                <Nav.Link 
+                                    className={`active ${favMenuClass}`} 
+                                    href={'#Favourites'} 
+                                    onClick={() => clickMenuLink('fav_list')} 
+                                    data-test="comp-header-menu-fav"
+                                    id="Favourites" 
+                                    
+                                >
                                     Favourites
                                 </Nav.Link>
                             </Nav>
