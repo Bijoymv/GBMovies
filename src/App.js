@@ -25,20 +25,26 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    //Get the movie results and the storage status in the begining of the app load
     this.props.getMovies();
     this.props.getStorage();
   }
 
   fetchMovies = debounce(query => {
+    //API triggers are limited by the debounce function to reduce network calls
+    //This method is triggered from input search box when user enter the search input
     this.props.getMovies(query);
   }, 500);
 
   onSearchChange(ev) {
+    //Input change in the text box will trigger this event method
+    //Default search input is set as "gandhi"
+    ev.stopPropagation();
     let query = ev.target.value;
     if (query === "") {
       query = "gandhi";
     }
-
+    //If user in fav or watch menu don't call api, just search in the localstorage
     if (this.props.gets.favMenu || this.props.gets.watchMenu) {
       const menuData = this.props.gets.favMenu
         ? this.props.gets.favList
@@ -53,11 +59,14 @@ class App extends React.Component {
         menuData
       );
     } else {
+      //If user in fav or watch menu call search API with user query values
       this.fetchMovies(query);
     }
   }
 
   handleClick = type => {
+    //Method triggered from the header component
+    //This will show the contents based on the user menu selection
     switch (type) {
       case "watch_list":
         this.props.getWatchList();
@@ -71,6 +80,8 @@ class App extends React.Component {
   };
 
   handleSubmit = (type, val) => {
+    //Method triggered from the movielist component
+    //This will add or delete the user selected watch list or fav contents to localstorage
     switch (type) {
       case "watch_add":
         this.props.getStorageAdd("watch", val);
@@ -98,6 +109,8 @@ class App extends React.Component {
   };
 
   render() {
+    //This will render the contents based on the search results
+    //We are expecting the contents should be in the format of array of objects with gets state as key.
     const { gets } = this.props;
     const data = gets.results;
     return (
@@ -140,12 +153,14 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => {
+  // Redux method
   return {
     gets: state.gets
   };
 };
 
 export default connect(
+  // Redux method
   mapStateToProps,
   {
     getMovies,
