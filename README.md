@@ -6,23 +6,23 @@ An web application application for searching good and bad movies. This responsiv
 * ### Search :
 
     * #### Home
-    * User can enter the title of the movies in the input search box at the top header portion
-    * Search API will be triggered asynchronously to the TMDb database
-    * Search results will be shown in the web page below to text search box
-    * Web page will not show the movies with out movie titles
-    * Search feature is implemented with _debounce_ feature so that it trigger network calls after 500 ms delay
-    * Web page will display default posters if actual posters are not available
-    * If no matching title values found, it will show an error message
+        * User can enter the title of the movies in the input search box at the top header portion
+        * Search API will be triggered asynchronously to the TMDb database
+        * Search results will be shown in the web page below to text search box
+        * Web page will not show the movies with out movie titles
+        * Search feature is implemented with _debounce_ feature so that it trigger network calls after 500 ms delay
+        * Web page will display default posters if actual posters are not available
+        * If no matching title values found, it will show an error message
 
     * #### Watch List Search
-    * Search here apply only to display the user added watchlist items
-    * If no matching title values found, it will show an error message
-    * Browser localstorage api is used to create the persistent watch list data
+        * Search here apply only to display the user added watchlist items
+        * If no matching title values found, it will show an error message
+        * Browser localstorage api is used to create the persistent watch list data
 
     * #### Favourite Search
-    * Search here apply only to display the user added favourite items
-    * If no matching title values found, it will show an error message
-    * Browser localstorage api is used to create the persistent favourite list data
+        * Search here apply only to display the user added favourite items
+        * If no matching title values found, it will show an error message
+        * Browser localstorage api is used to create the persistent favourite list data
 
 * ### Watch List :
     * User can add watch items from home listing page
