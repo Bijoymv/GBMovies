@@ -4,6 +4,7 @@ export const FindTestValue = (component, value) => {
   const container = component.find(`[data-test='${value}']`);
   return container;
 };
+
 export const checkProps = (component, expectedProps) => {
   const propsErr = checkPropTypes(
     component.propTypes,

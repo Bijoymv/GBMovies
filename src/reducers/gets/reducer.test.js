@@ -112,7 +112,6 @@ describe("Gets Reducer Test", () => {
   });
 });
 
-
 it("Should return new state if receiving type GET_STORAGE", () => {
   const favresult = {
     popularity: 432.456,
@@ -138,7 +137,6 @@ it("Should return new state if receiving type GET_STORAGE", () => {
     favMenu: false,
     watchMenu: false,
     results: []
-
   };
   const newState = getsReducer(undefined, {
     type: types.GET_STORAGE,
@@ -147,9 +145,7 @@ it("Should return new state if receiving type GET_STORAGE", () => {
   expect(newState).toEqual(gets);
 });
 
-
 it("Should return new state if receiving type GET_STORAGE_SEARCH", () => {
-
   const watchresult = {
     popularity: 4322.456,
     poster_path: "/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",
@@ -158,14 +154,14 @@ it("Should return new state if receiving type GET_STORAGE_SEARCH", () => {
     id: 12333
   };
 
-  const payload= { watchMenu: true, favMenu: false, results: watchresult };
+  const payload = { watchMenu: true, favMenu: false, results: watchresult };
 
   const gets = {
     favList: [],
     watchList: [],
     favMenu: false,
     watchMenu: true,
-    results:watchresult
+    results: watchresult
   };
 
   const newState = getsReducer(undefined, {
@@ -175,11 +171,8 @@ it("Should return new state if receiving type GET_STORAGE_SEARCH", () => {
   expect(newState).toEqual(gets);
 });
 
-
-
 it("Should return new state if receiving type GET_STORAGE_ADD", () => {
-
-  const payload= null;
+  const payload = null;
 
   const gets = {
     favMenu: false,
@@ -197,8 +190,7 @@ it("Should return new state if receiving type GET_STORAGE_ADD", () => {
 });
 
 it("Should return new state if receiving type GET_STORAGE_DEL", () => {
-
-  const payload= null;
+  const payload = null;
 
   const gets = {
     favMenu: false,

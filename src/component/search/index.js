@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import "./style.css";
 
 const Search = props => {
-
-  if(!props.searchChange){
+  if (!props.searchChange) {
     return false;
   }
 

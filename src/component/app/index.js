@@ -1,9 +1,9 @@
 import React from "react";
-import Header from "./component/header";
-import MovieList from "./component/movielist";
+import Header from "../header";
+import MovieList from "../movielist";
 import { connect } from "react-redux";
-import Search from "./component/search";
-import debounce from "./debounce";
+import Search from "../search";
+import debounce from "../../debounce";
 import {
   getMovies,
   getWatchList,
@@ -12,9 +12,9 @@ import {
   getStorageAdd,
   getStorageDelete,
   getStorageSearch
-} from "./actions";
+} from "../../actions";
 
-import "./App.css";
+import "./style.css";
 
 class App extends React.Component {
   constructor(props) {
@@ -101,7 +101,7 @@ class App extends React.Component {
     const { gets } = this.props;
     const data = gets.results;
     return (
-      <div className="App">
+      <div className="App" data-test="App-container">
         <Header
           clickMenu={this.handleClick}
           favMenu={gets.favMenu}
@@ -110,7 +110,7 @@ class App extends React.Component {
         <Search searchChange={this.onSearchChange} />
 
         {data.length > 0 && (
-          <div>
+          <div data-test="App-movielist-container">
             {data.map((get, index) => {
               const { popularity, poster_path, title, overview, id } = get;
               const movieListItems = {
