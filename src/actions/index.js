@@ -3,9 +3,9 @@ import axios from "axios";
 import {
   getLocalState,
   addLocalState,
-  deleteLocalState
-} from "./../localStorage";
-import SearchFilter from "./../searchFilter";
+  deleteLocalState,
+  SearchFilter
+} from "../utils";
 
 export const getMovies = (query = "gandhi") => async dispatch => {
   await axios

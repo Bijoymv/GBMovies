@@ -3,7 +3,7 @@ import Header from "../header";
 import MovieList from "../movielist";
 import { connect } from "react-redux";
 import Search from "../search";
-import debounce from "../../debounce";
+import { debounce } from "../../utils";
 import {
   getMovies,
   getWatchList,
