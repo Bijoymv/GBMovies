@@ -1,9 +1,9 @@
 .App {
-    text-align: center;
-    background-color: #343a40;
-    min-height: 100vh;
-  }
-  
-  .App-error-div{
-    margin-top:5px;
-  }
+  text-align: center;
+  background-color: #343a40;
+  min-height: 100vh;
+}
+
+.App-error-div {
+  margin-top: 5px;
+}
