@@ -52,7 +52,7 @@ This project is created using the react framework so building the application is
 
 * There is a space for more test coverage,featrure addition and the code refractoring. 
 
-* Not tried react hooks but love to change it in future
+* React hooks!!! not tried yet, love to change it.
 
 
 
