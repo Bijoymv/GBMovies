@@ -1,4 +1,4 @@
-# GB Movies
+# GB Movies - A React-Redux-Bootstrap Web Application
 An web application application for searching good and bad movies. This responsive web app will list the movies from the TMDb database. 
 
 ## Features
@@ -38,7 +38,7 @@ An web application application for searching good and bad movies. This responsiv
 
 ## Frameworks and dependencies
 
-This project developed in react(16.11.0) and react-redux (7.1.1) framework. Used axios(0.19.0),redux-thunk,react-bootstrap dependencies for async API calls and responsive web layouts.
+This project developed in react(16.11.0) and react-redux (7.1.1) framework. Used axios(0.19.0),redux-thunk,react-bootstrap dependencies for async API calls and responsive web layouts. jest-enzyme (7.1.2) for unit testing. 
 
 ## Build process
 
@@ -46,11 +46,13 @@ This project is created using the react framework so building the application is
 
 ## Limitations and Concerns
 
-* There is no pagination implemented, since the web app main feature is search, user can get all the desired results from 20 API entries. 
+* There is no pagination implemented, since the web app main feature is search, user can get all the desired results from first 20 search results
 
 * Browser localstoarge api is using heavily in the application to store the persistent watch list and favourite data. In ideal case we will be creating database entries based on the user profiles, so this can be corrected if we move into database approach in the production. 
 
-* There is a space for more test coverage and the code refractoring. 
+* There is a space for more test coverage,featrure addition and the code refractoring. 
+
+* Not tried react hooks but love to change it in future
 
 
 
