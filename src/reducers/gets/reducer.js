@@ -38,6 +38,9 @@ export default (state = initialstate, action) => {
       newState.watchMenu = action.payload.watchMenu;
       newState.results = action.payload.results;
       return newState;
+    case types.GET_STORAGE_ADD:
+    case types.GET_STORAGE_DEL:
+      return newState;
     default:
       return newState;
   }
